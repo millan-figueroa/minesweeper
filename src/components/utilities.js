@@ -75,3 +75,22 @@ if (y > 0 && x > 0) el.push(data[y - 1][x - 1]); // diagonal bottom left
 
     return el;
 };
+
+//Get a random number on the vertical/horizontal axis
+export const getRandomNumber = (dimension) => {
+    return Math.floor((Math.random() * 1000) + 1) % dimension;
+};
+
+//Plant mines in random cells in the grid
+export const plantMines = (data, height, width, mines) => {
+    let randomx, randomy, minesPlanted = 0;
+    while (minesPlanted < mines) {
+        randomx = getRandomNumber(width);
+        randomy = getRandomNumber(height);
+        if (!data[randomy][randomx].isMine) {
+        data[randomy][randomx].isMine = true;
+        minesPlanted++;
+        }
+    }
+    return data;
+};
