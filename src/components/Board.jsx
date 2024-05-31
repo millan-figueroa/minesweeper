@@ -25,3 +25,5 @@ const Board = ({ data, handleCellClick, handleContextMenu }) => {
         </div>
     )
 }
+
+export default Board;
