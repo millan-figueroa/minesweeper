@@ -7,7 +7,7 @@ const Board = ({ data, handleCellClick, handleContextMenu }) => {
     return (
         <div className="board">
             /* vertical - use .map to loop thru "data" array, pass in each item which will render as a div containing cell */
-            { DataTransfer.map(datarow =>
+            { data.map(datarow =>
                 datarow.map(dataitem => 
                     // To make React stop generating add key (like base case?) in this case we're passing in coordinates 
                     <div key={`${dataitem.y}-${dataitem.x}`}> 
