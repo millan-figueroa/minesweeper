@@ -94,3 +94,39 @@ export const plantMines = (data, height, width, mines) => {
     }
     return data;
 };
+
+//Get the count of mines in cells bordering the current cell
+export const getNeighborMines = (data, height, width) => {
+    let updatedData = data;
+    for (let i = 0; i < height; i++) {
+        for (let j = 0; j < width; j++) {
+        if (!data[i][j].isMine) {
+            let mine = 0;
+            const area = traverseBoard(data[i][j].y, data[i][j].x, data, height, width);
+            area.forEach(value => {
+            if (value.isMine) {
+                mine++;
+            }
+            });
+            if (mine === 0) {
+            updatedData[i][j].isEmpty = true;
+            }
+            updatedData[i][j].neighbor = mine;
+        }
+        }
+    }
+    return updatedData;
+};
+
+//loop through the game board and mark the current appearance of the cells - flag? mine? revealed?
+export const filterBoard = (data, checkType) => {
+    let resultArray = [];
+    data.forEach(datarow => {
+        datarow.forEach(dataitem => {
+        if (checkType(dataitem)) {
+            resultArray.push(dataitem);
+        }
+        });
+    });
+    return resultArray;
+};
